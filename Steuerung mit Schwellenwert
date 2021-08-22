@@ -1,0 +1,18 @@
+#include <Servo.h> 
+Servo SERVO1; 
+float VALUE; 
+int SCHWELLE = 80; // die SCHWELLE wurde mit dem Datentype Integer 80 definiert
+void setup () {
+  Serial.begin(9600); 
+  SERVO1.attach(9); 
+}
+void loop () {
+  VALUE = analogRead(A3); 
+         if (VALUE > SCHWELLE) {
+               SERVO1.write(0); 
+         }
+         else {
+               SERVO1.write(120); 
+          }
+  Serial.println(VALUE); 
+  }
