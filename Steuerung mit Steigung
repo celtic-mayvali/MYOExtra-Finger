@@ -1,0 +1,27 @@
+#include <Servo.h>
+#define STEIGUNG 30
+Servo SERVO1;
+float DIFF;
+float NEU_VALUE;
+float VALUE;
+long timer = 0; 
+int DELAY = 100;  
+void setup () {
+  	Serial.begin(9600); 
+  	SERVO1.attach(9); 
+}
+void loop () {
+ 	 if (millis () > (timer + DELAY)) {
+   		 VALUE = analogRead(A3); 
+    		 DIFF= VALUE – NEU_VALUE; 
+   		 NEU_VALUE = VALUE; 
+        if (DIFF > STEIGUNG) {
+        		SERVO1.write(0); 
+      }
+      else if (DIFF < (-STEIGUNG)) {
+        		SERVO1.write(120); 
+      }
+      timer = millis ();
+      }
+  Serial.println(analogRead(A3));
+}
